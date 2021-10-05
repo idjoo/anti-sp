@@ -6,11 +6,11 @@ absence, written purely in go.
     go install github.com/cocatrip/anti-sp@latest
 
 ## Usage
-When first running anti-sp will ask for a username and password:
+When first running anti-sp will ask for a username and password
     Username: <Your Bimay Username (without @binus.ac.id)>
     Password: <Your Bimay Password>
 
-Example:
+Example
     Username: rayhan.noersandi
     Password: mySecurePass!@#
 
