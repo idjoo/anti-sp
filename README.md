@@ -3,8 +3,10 @@ Program created for binusian to minimalize the chance to fail classes because of
 absence, written purely in go.
 
 ## Installation
-`go install github.com/cocatrip/anti-sp@latest`
-You can also download the executables directly from the [release page](https://github.com/cocatrip/anti-sp/releases)
+```
+go install github.com/cocatrip/anti-sp@latest
+```
+Or, you can also download the executables directly from the [release page](https://github.com/cocatrip/anti-sp/releases)
 
 ## Usage
 When first running anti-sp will ask for a username and password:
@@ -28,6 +30,6 @@ On Unix systems, it returns $XDG_CONFIG_HOME as specified by [freedesktop](https
 ## Windows
 For Windows user the exe file might be detected as a virus and can't be downloaded.
 This happens because the `exe` file is not yet signed, to ignore this problem follow these steps:
-[step 1](tutorial/tutorial_1.jpg)
-[step 2](tutorial/tutorial_2.jpg)
-[step 3](tutorial/tutorial_3.jpg)
+![step 1](tutorial/tutorial_1.jpg)
+![step 2](tutorial/tutorial_2.jpg)
+![step 3](tutorial/tutorial_3.jpg)
