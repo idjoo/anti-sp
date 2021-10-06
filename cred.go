@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+
+    "github.com/howeyc/gopass"
 )
 
 func CheckCredentials(user User, path string, fpath string) bool {
@@ -18,7 +20,8 @@ func CheckCredentials(user User, path string, fpath string) bool {
         fmt.Printf("Username: ")
         fmt.Scan(&user.Username)
         fmt.Printf("Password: ")
-        fmt.Scan(&user.Password)
+        password, _ := gopass.GetPasswd()
+        user.Password = string(password)
     // if file exist then check credential
     } else {
         file, _ := ioutil.ReadFile(fpath)
@@ -30,7 +33,8 @@ func CheckCredentials(user User, path string, fpath string) bool {
             fmt.Printf("Username: ")
             fmt.Scan(&user.Username)
             fmt.Printf("Password: ")
-            fmt.Scan(&user.Password)
+            password, _ := gopass.GetPasswd()
+            user.Password = string(password)
         }
     }
 

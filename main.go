@@ -21,6 +21,31 @@ var (
     baseURL = "https://myclass.apps.binus.ac.id"
 )
 
+var clear map[string]func()
+
+func init() {
+    clear = make(map[string]func())
+    clear["linux"] = func() {
+        cmd := exec.Command("clear")
+        cmd.Stdout = os.Stdout
+        cmd.Run()
+    }
+    clear["windows"] = func() {
+        cmd := exec.Command("cmd", "/c", "cls")
+        cmd.Stdout = os.Stdout
+        cmd.Run()
+    }
+}
+
+func CallClear() {
+    value, ok := clear[runtime.GOOS]
+    if ok {
+        value()
+    } else {
+        log.Println("Your platform is unsupported!")
+    }
+}
+
 func Login(client *http.Client, user User) AuthResponse {
     var authResponse AuthResponse
 
@@ -184,6 +209,8 @@ func main() {
         Jar: jar,
     }
 
+    CallClear()
+
     fmt.Println("Logging in...")
     authResponse := Login(client, user)
 
@@ -239,9 +266,11 @@ func main() {
 
             time.Sleep(1 * time.Minute)
         }
-        writer.Stop()
     } else {
         fmt.Println(authResponse)
+        if err := os.Remove(fpath); err != nil {
+            log.Fatal(err)
+        }
     }
 }
 
