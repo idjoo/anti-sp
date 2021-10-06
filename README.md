@@ -22,4 +22,3 @@ Users should create their own application-specific subdirectory within this one 
 
 On Unix systems, it returns $XDG_CONFIG_HOME as specified by [freedesktop](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) if non-empty, else $HOME/.config. On Darwin, it returns $HOME/Library/Application Support. On Windows, it returns %AppData%. On Plan 9, it returns $home/lib.
 
-
