@@ -83,15 +83,18 @@ func GetViconSchedule(client *http.Client, authResponse AuthResponse) []ViconSch
         log.Fatal(err)
     }
 
-
     response, err := client.Do(request)
     if err != nil {
         log.Fatal(err)
     }
     defer response.Body.Close()
 
-    if err := json.NewDecoder(response.Body).Decode(&schedules); err != nil {
-        log.Fatal(err)
+    for i:=0; i<3; i++ {
+        if err := json.NewDecoder(response.Body).Decode(&schedules); err != nil {
+            log.Println(err)
+        } else {
+            break
+        }
     }
 
     return schedules
@@ -222,12 +225,13 @@ func main() {
         getData := true
         isValid := false
         openBrowser := true
+        fmt.Fprintf(writer, "Fetching schedule...\n")
+        schedules = GetViconSchedule(client, authResponse)
         for {
             currTime := time.Now()
             currLayout := "Mon, 02 Jan 2006 15:04 WIB"
             currTimeStampString := currTime.Format(currLayout)
             currTimeStamp, err := time.Parse(currLayout, currTimeStampString)
-            // min := currTimeStamp.Minute()
             if err != nil {
                 log.Fatal(err)
             }
@@ -238,9 +242,13 @@ func main() {
                 openBrowser = true
             }
 
-            if getData == true {
+            hr, min := currTimeStamp.Hour(), currTimeStamp.Minute()
+            if hr == 23 && min == 59 {
                 fmt.Fprintf(writer, "Fetching schedule...\n")
                 schedules = GetViconSchedule(client, authResponse)
+            }
+
+            if getData == true {
                 schedule = GetNextMeeting(schedules, currTimeStamp)
                 getData = false
             }
@@ -262,8 +270,6 @@ func main() {
                     openBrowser = false
                 }
             }
-
-
             time.Sleep(1 * time.Minute)
         }
     } else {
