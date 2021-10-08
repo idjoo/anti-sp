@@ -1,6 +1,7 @@
 # anti-sp
-Program created for binusian to minimalize the chance to fail classes because of
-absence, written purely in go.
+Program created for binusian to minimalize the chance to fail classes because of absence, written purely in go.
+This Program is inpired by [BimayInstantVicon](https://github.com/ayangd/BimayInstantVicon) which is made by [ayangd](https://github.com/ayangd).
+So shout out to him and go checkout his projects.
 
 ## Installation
 ```
