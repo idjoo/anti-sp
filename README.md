@@ -32,10 +32,13 @@ For Windows user the exe file might be detected as a virus and can't be download
 This happens because the `exe` file is not yet signed, to ignore this problem follow these steps:
 
 Press the arrow button and click `keep`.
+
 ![step 1](tutorial/tutorial_1.jpg)
 
 Select `More info` then the `Run anyway` button will show up.
+
 ![step 2](tutorial/tutorial_2.jpg)
 
 Press the `Run anyway` button.
+
 ![step 3](tutorial/tutorial_3.jpg)
