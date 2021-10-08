@@ -18,7 +18,7 @@ Password: <Your Bimay Password>
 
 Example:
 ```
-Username: rayhan.noersandi
+Username: firstname.lastname
 Password: mySecurePass!@#
 ```
 The username and password will then be stored in your computer locally

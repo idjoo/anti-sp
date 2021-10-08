@@ -6,9 +6,47 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"os/exec"
+	"runtime"
 
-    "github.com/howeyc/gopass"
+	"github.com/howeyc/gopass"
 )
+
+func PromptUnix(user User) User {
+    fmt.Printf("Username: ")
+    fmt.Scan(&user.Username)
+    fmt.Printf("Password: ")
+    password, _ := gopass.GetPasswd()
+    user.Password = string(password)
+    return user
+}
+
+func PromptWindows(user User) User {
+    fmt.Printf("Username: ")
+    fmt.Scan(&user.Username)
+    fmt.Printf("Password: ")
+    fmt.Scan(&user.Password)
+    return user
+}
+
+func Prompt(user User) User {
+	var err error
+
+	switch runtime.GOOS {
+	case "linux":
+        PromptUnix(user)
+	case "windows":
+        PromptWindows(user)
+	case "darwin":
+        PromptUnix(user)
+	default:
+		err = fmt.Errorf("unsupported platform")
+	}
+	if err != nil {
+		log.Fatal(err)
+	}
+    return user
+}
 
 func CheckCredentials(user User, path string, fpath string) bool {
     // if file doesn't exist then create one
@@ -17,11 +55,8 @@ func CheckCredentials(user User, path string, fpath string) bool {
 
         os.MkdirAll(path, os.ModePerm)
 
-        fmt.Printf("Username: ")
-        fmt.Scan(&user.Username)
-        fmt.Printf("Password: ")
-        password, _ := gopass.GetPasswd()
-        user.Password = string(password)
+        user = Prompt(user)
+
     // if file exist then check credential
     } else {
         file, _ := ioutil.ReadFile(fpath)
@@ -30,11 +65,7 @@ func CheckCredentials(user User, path string, fpath string) bool {
         }
 
         if user.Username == "" ||  user.Password == "" {
-            fmt.Printf("Username: ")
-            fmt.Scan(&user.Username)
-            fmt.Printf("Password: ")
-            password, _ := gopass.GetPasswd()
-            user.Password = string(password)
+            user = Prompt(user)
         }
     }
 
