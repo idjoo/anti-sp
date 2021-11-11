@@ -233,7 +233,11 @@ func main() {
 			if err != nil {
 				log.Fatal(err)
 			}
-			fmt.Fprintf(writer, "Current Time:\n%v\n", currTimeStampString)
+
+			time.Sleep(3 * time.Second)
+			CallClear()
+
+			fmt.Fprintf(writer, "%v\n", currTimeStampString)
 
 			if isValid == false && openBrowser == false {
 				openBrowser = true
