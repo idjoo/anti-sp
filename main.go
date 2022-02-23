@@ -13,7 +13,6 @@ import (
 	"os/exec"
 	"runtime"
 	"time"
-
 	"github.com/gosuri/uilive"
 )
 
